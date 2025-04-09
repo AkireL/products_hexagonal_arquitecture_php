@@ -47,15 +47,15 @@ class EloquentUserRepository implements UserRepositoryInterface
         }
     }
 
-    public function update(UserDomain $user): void
+    public function update(UserDomain $userDomain): void
     {
-        $user = User::find($user->getId());
+        $user = User::find($userDomain->getId());
 
         if ($user) {
             $user->update([
-                'name' => $user->getName(),
-                'email' => $user->getEmail(),
-                'password' => $user->getPassword(),
+                'name' => $userDomain->getName(),
+                'email' => $userDomain->getEmail(),
+                'password' => $userDomain->getPassword(),
             ]);
         }
     }

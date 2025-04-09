@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Infraestructure\Persistence;
+
+use App\Domain\Entities\Product as ProductDomain;
+use App\Domain\Ports\ProductRepositoryInterface;
+use App\Models\Product;
+
+class EloquentProductRepository implements ProductRepositoryInterface
+{
+    public function save(ProductDomain $product): void
+    {
+        Product::create([
+            'name' => $product->getName(),
+            'description' => $product->getDescription(),
+            'unit_price' => $product->getUnitPrice(),
+            'stock' => $product->getStock(),
+        ]);
+    }
+
+    public function findById(int $id): ?ProductDomain
+    {
+        $product = Product::find($id);
+        if (! $product) {
+            return null;
+        }
+
+        return new ProductDomain($product->id, $product->name, $product->unit_price, $product->stock, $product->description);
+    }
+
+    public function findByName(string $name): ?ProductDomain
+    {
+        $product = Product::where('name', $name)->first();
+
+        if (! $product) {
+            return null;
+        }
+
+        return new ProductDomain($product->id, $product->name, $product->unit_price, $product->stock, $product->description);
+    }
+
+
+    public function delete(int $id): void
+    {
+        $product = Product::find($id);
+
+        if ($product) {
+            $product->delete();
+        }
+    }
+
+    public function update(ProductDomain $productDomain): void
+    {
+        $product = Product::find($productDomain->getId());
+
+        if ($product) {
+            $product->update([
+                'name' => $productDomain->getName(),
+                'description' => $productDomain->getDescription(),
+                'stock' => $productDomain->getStock(),
+                'unit_price' => $productDomain->getUnitPrice(),
+            ]);
+        }
+    }
+}
