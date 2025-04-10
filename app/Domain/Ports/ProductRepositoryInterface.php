@@ -6,6 +6,8 @@ use App\Domain\Entities\Product;
 
 interface ProductRepositoryInterface
 {
+    public function list(): array;
+
     public function save(Product $product): void;
 
     public function findById(int $id): ?Product;

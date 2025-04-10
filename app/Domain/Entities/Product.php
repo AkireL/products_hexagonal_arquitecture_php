@@ -30,4 +30,9 @@ class Product
     {
         return $this->stock;
     }
+
+    public function __toString()
+    {
+        return "Product ID: {$this->id}, Name: {$this->name}, Unit Price: {$this->unitPrice}, Stock: {$this->stock}, Description: {$this->description}";
+    }
 }

@@ -21,6 +21,7 @@ class EloquentProductRepository implements ProductRepositoryInterface
     public function findById(int $id): ?ProductDomain
     {
         $product = Product::find($id);
+
         if (! $product) {
             return null;
         }
@@ -42,11 +43,7 @@ class EloquentProductRepository implements ProductRepositoryInterface
 
     public function delete(int $id): void
     {
-        $product = Product::find($id);
-
-        if ($product) {
-            $product->delete();
-        }
+        Product::where('id', $id)->delete();
     }
 
     public function update(ProductDomain $productDomain): void
@@ -61,5 +58,10 @@ class EloquentProductRepository implements ProductRepositoryInterface
                 'unit_price' => $productDomain->getUnitPrice(),
             ]);
         }
+    }
+
+    public function list(): array
+    {
+        return Product::all()->toArray();
     }
 }
