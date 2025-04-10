@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Domain\Entities\Product as ProductDomain;
 use App\Domain\UseCases\Product\CreateProduct;
 use App\Domain\UseCases\Product\DeleteProduct;
+use App\Domain\UseCases\Product\ListProduct;
+use App\Domain\UseCases\Product\RetrieveProduct;
 use App\Domain\UseCases\Product\UpdateProduct;
 use App\Http\Requests\ProductRequest;
 use App\Infraestructure\Persistence\EloquentProductRepository;
@@ -12,6 +14,28 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
+        $useCase = new ListProduct(new EloquentProductRepository);
+        $products = $useCase->execute();
+
+        return response()->json($products);
+    }
+
+    public function show(Product $product)
+    {
+        $useCase = new RetrieveProduct(new EloquentProductRepository);
+        $product = $useCase->execute($product->id);
+
+        return response()->json([
+            'id' => $product->getId(),
+            'name' => $product->getName(),
+            'unit_price' => $product->getUnitPrice(),
+            'stock' => $product->getStock(),
+            'description' => $product->getDescription()
+        ]);
+    }
+
     public function store(ProductRequest $request)
     {
         $data = $request->validated();
@@ -34,7 +58,7 @@ class ProductController extends Controller
             new ProductDomain(
                 $product->id,
                 $data['name'],
-                $data['price'],
+                $data['unit_price'],
                 $data['stock'] ?? 0,
                 $data['description'] ?? null
             )
