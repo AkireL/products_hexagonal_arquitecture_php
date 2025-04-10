@@ -4,7 +4,7 @@ namespace App\Domain\Entities;
 
 class Product
 {
-    public function __construct(private int $id, private string $name, private float $unitPrice, private int $stock=0, private ?string $description=null) {}
+    public function __construct(private int $id, private string $name, private float $unitPrice, private int $stock = 0, private ?string $description = null) {}
 
     public function getId(): int
     {

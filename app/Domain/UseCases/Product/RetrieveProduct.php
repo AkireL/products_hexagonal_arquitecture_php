@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Domain\UseCases\Product;
-use App\Domain\Ports\ProductRepositoryInterface;
+
 use App\Domain\Entities\Product;
+use App\Domain\Ports\ProductRepositoryInterface;
 
 class RetrieveProduct
 {
@@ -13,8 +14,9 @@ class RetrieveProduct
         $product = $this->repository->findById($id);
 
         if ($product === null) {
-            throw new \Exception("Product not found");
+            throw new \Exception('Product not found');
         }
+
         return $product;
     }
 }

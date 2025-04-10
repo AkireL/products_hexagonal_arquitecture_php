@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Domain\UseCases\Product;
+
 use App\Domain\Ports\ProductRepositoryInterface;
 
 class ListProduct

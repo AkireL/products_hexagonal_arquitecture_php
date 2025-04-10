@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Domain\UseCases\Product;
-use App\Domain\Ports\ProductRepositoryInterface;
+
 use App\Domain\Entities\Product;
+use App\Domain\Ports\ProductRepositoryInterface;
 
 class UpdateProduct
 {
@@ -13,7 +14,7 @@ class UpdateProduct
         $product = $this->repository->findById($product->getId());
 
         if ($product === null) {
-            throw new \Exception("Product not found");
+            throw new \Exception('Product not found');
         }
 
         $this->repository->update($product);

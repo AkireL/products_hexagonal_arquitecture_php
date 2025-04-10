@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Domain\UseCases\Product;
+
 use App\Domain\Ports\ProductRepositoryInterface;
-use App\Domain\Entities\Product;
 
 class DeleteProduct
 {
@@ -13,7 +13,7 @@ class DeleteProduct
         $product = $this->repository->findById($id);
 
         if ($product === null) {
-            throw new \Exception("Product not found");
+            throw new \Exception('Product not found');
         }
 
         $this->repository->delete($id);

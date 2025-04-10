@@ -32,7 +32,7 @@ class ProductController extends Controller
             'name' => $product->getName(),
             'unit_price' => $product->getUnitPrice(),
             'stock' => $product->getStock(),
-            'description' => $product->getDescription()
+            'description' => $product->getDescription(),
         ]);
     }
 
@@ -47,6 +47,7 @@ class ProductController extends Controller
             $data['stock'] ?? 0,
             $data['description'] ?? null
         );
+
         return response()->json(['message' => 'Product created successfully'], 201);
     }
 
@@ -63,6 +64,7 @@ class ProductController extends Controller
                 $data['description'] ?? null
             )
         );
+
         return response()->json(['message' => 'Product updated successfully']);
     }
 
@@ -70,6 +72,7 @@ class ProductController extends Controller
     {
         $useCase = new DeleteProduct(new EloquentProductRepository);
         $useCase->execute($product->id);
+
         return response()->json(['message' => 'Product deleted successfully']);
     }
 }

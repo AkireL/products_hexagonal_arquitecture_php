@@ -9,7 +9,7 @@ class CreateProduct
 {
     public function __construct(private ProductRepositoryInterface $repository) {}
 
-    public function execute(string $name, float $unitPrice, int $stock=0, ?string $description=null): void
+    public function execute(string $name, float $unitPrice, int $stock = 0, ?string $description = null): void
     {
         $user = new Product(0, $name, $unitPrice, $stock, $description);
 

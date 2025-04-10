@@ -40,7 +40,6 @@ class EloquentProductRepository implements ProductRepositoryInterface
         return new ProductDomain($product->id, $product->name, $product->unit_price, $product->stock, $product->description);
     }
 
-
     public function delete(int $id): void
     {
         Product::where('id', $id)->delete();
