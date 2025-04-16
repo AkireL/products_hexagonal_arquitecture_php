@@ -20,6 +20,11 @@ class Order
         return $this->user;
     }
 
+    public function loadProducts()
+    {
+
+    }
+
     public function addProduct(Product $product, float $quantity)
     {
         if ($product->getStock() <= $quantity){return null;}
@@ -32,11 +37,11 @@ class Order
         }
 
         $this->products[] = [
-            'id' => $product['id'],
-            'quantity' => $product['quantity'],
-            'total_price' => $product['unit_price'] * $product['quantity'],
-            'description' => $product['description'],
-            'unit_price' => $product['unit_price'],
+            'id' => $product->getId(),
+            'quantity' => $quantity,
+            'total_price' => $product->getUnitPrice() * $quantity,
+            'description' => $product->getDescription(),
+            'unit_price' => $product->getUnitPrice(),
         ];
     }
 

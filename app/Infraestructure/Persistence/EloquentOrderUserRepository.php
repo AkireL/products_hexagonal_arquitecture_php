@@ -8,6 +8,7 @@ use App\Domain\Entities\ProductOrder;
 use App\Domain\Entities\User as UserEntity;
 use App\Domain\Ports\OrderUserRepositoryInterface;
 use App\Models\Order as OrderModel;
+use Illuminate\Support\Facades\Log;
 
 class EloquentOrderUserRepository implements OrderUserRepositoryInterface
 {
@@ -33,11 +34,11 @@ class EloquentOrderUserRepository implements OrderUserRepositoryInterface
         }
 
         foreach ($order->getProducts() as $product) {
-            $model->products()->attach($product->id, [
-                'quantity' => $product->quantity,
-                'total_price' => $product->total_price,
-                'description' => $product->description,
-                'unit_price' => $product->unit_price,
+            $model->products()->attach($product['id'], [
+                'quantity' => $product['quantity'],
+                'total_price' => $product['total_price'],
+                'product_description' => $product['description'],
+                'product_unit_price' => $product['unit_price'],
             ]);
         }
     }
@@ -52,29 +53,18 @@ class EloquentOrderUserRepository implements OrderUserRepositoryInterface
             return null;
         }
 
+        Log::info('Products retrieved from the repository', ['products' => $order->products]);
+
         $orderEntity = new OrderEntity($user, $order->id);
 
-        foreach ($order->getAllProducts() as $product) {
-            $product = new ProductOrder(
-                $product->id,
-                $product->order_id,
-                $product->product_id,
-                $product->name,
-                $product->quantity,
-                $product->total_price,
-                $product->product_description,
-                $product->product_unit_price
-            );
-
-            $quantity = $product->getQuantity();
-            $productE = new ProductEntity(
-                $product->getId(),
-                $product->getName(),
-                $product->getUnitPrice(),
-                $product->getStock(),
-                $product->getDescription(),
-            );
-            $orderEntity->addProduct($productE, $quantity);
+        foreach ($order->products() as $product) {
+            // $productE = new ProductEntity(
+            //     $product->getId(),
+            //     $product->getName(),
+            //     $product->getUnitPrice(),
+            //     $product->getStock(),
+            //     $product->getDescription(),
+            // );
         }
         return $orderEntity;
     }
@@ -153,7 +143,24 @@ class EloquentOrderUserRepository implements OrderUserRepositoryInterface
 
     public function getProducts(OrderEntity $order): array
     {
-        return [];
+        $orderModel = OrderModel::find($order->getId());
+        $productsToSend = [];
+
+        if (! $orderModel) {
+            return [];
+        }
+        $products = $orderModel->products;
+
+        foreach ($products as $productOrder) {
+            $productsToSend[] = [
+                'id' => $productOrder->id,
+                'quantity' => $productOrder->pivot->quantity,
+                'total_price' => $productOrder->pivot->total_price,
+                'description' => $productOrder->pivot->description,
+                'unit_price' => $productOrder->pivot->unit_price,
+            ];
+        }
+        return $productsToSend;
     }
 
     public function updateProduct(OrderEntity $order, ProductEntity $product): void
