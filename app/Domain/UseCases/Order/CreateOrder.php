@@ -6,7 +6,6 @@ use App\Domain\Entities\Order;
 use App\Domain\Entities\User;
 use App\Domain\Ports\OrderUserRepositoryInterface;
 use App\Domain\Ports\ProductRepositoryInterface;
-use Illuminate\Support\Facades\Log;
 
 class CreateOrder
 {
