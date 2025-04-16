@@ -8,7 +8,6 @@ use App\User\Domain\UseCases\CreateUser;
 use App\User\Domain\UseCases\DeleteUser;
 use App\User\Domain\UseCases\UpdateUser;
 use App\User\Infraestructure\Persistence\EloquentUserRepository;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -22,7 +21,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $useCase = new UpdateUser(new EloquentUserRepository);
         $useCase->execute($user->id, $request->name, $request->email, $request->password);

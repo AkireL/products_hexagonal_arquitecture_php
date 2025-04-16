@@ -10,7 +10,7 @@ class UpdateUser
 {
     public function __construct(private UserRepositoryInterface $repository) {}
 
-    public function execute(int $id, string $name, string $email, string $password): void
+    public function execute(int $id, ?string $name=null, ?string $email= null, ?string $password= null): void
     {
         $existingUser = $this->repository->findById($id);
 
@@ -18,7 +18,7 @@ class UpdateUser
             throw new Exception('User not found');
         }
 
-        $user = new User($name, $email, $password);
+        $user = new User($id, $name, $email, $password);
         $this->repository->update($user);
     }
 }

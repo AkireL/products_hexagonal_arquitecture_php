@@ -4,7 +4,7 @@ namespace App\User\Domain\Entities;
 
 class User
 {
-    public function __construct(private int $id, private string $name, private string $email, private string $password = '') {}
+    public function __construct(private ?int $id=null, private ?string $name=null, private ?string $email=null, private ?string $password = null) {}
 
     public function getId(): int
     {
@@ -16,17 +16,17 @@ class User
         $this->id = $id;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
