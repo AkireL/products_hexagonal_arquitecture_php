@@ -24,9 +24,9 @@ class UserRequest extends FormRequest
         switch ($this->method()) {
             case 'PUT':
                 return [
-                        'name' => 'sometimes|string|max:255',
-                        'email' => 'sometimes|email|max:255',
-                        'password' => 'sometimes|string|min:8',
+                    'name' => 'sometimes|string|max:255',
+                    'email' => 'sometimes|email|max:255',
+                    'password' => 'sometimes|string|min:8',
                 ];
                 break;
 

@@ -3,8 +3,8 @@
 namespace App\Features\Product\Infraestructure\Persistence;
 
 use App\Features\Product\Domain\Entities\Product as ProductDomain;
-use App\Models\Product;
 use App\Features\Product\Domain\Ports\ProductRepositoryInterface;
+use App\Models\Product;
 
 class EloquentProductRepository implements ProductRepositoryInterface
 {

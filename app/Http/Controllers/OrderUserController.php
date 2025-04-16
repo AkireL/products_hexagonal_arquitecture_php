@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OrderRequest;
-use App\Models\Order;
-use App\Features\Order\Domain\UseCases\CreateOrder;
 use App\Features\Order\Domain\UseCases\ClearOrder;
+use App\Features\Order\Domain\UseCases\CreateOrder;
 use App\Features\Order\Domain\UseCases\RetrieveOrder;
 use App\Features\Order\Infraestructure\Persistence\EloquentOrderUserRepository;
 use App\Features\Product\Infraestructure\Persistence\EloquentProductRepository;
 use App\Features\User\Infraestructure\Persistence\EloquentUserRepository;
+use App\Http\Requests\OrderRequest;
+use App\Models\Order;
 
 class OrderUserController extends Controller
 {
@@ -58,5 +58,3 @@ class OrderUserController extends Controller
         ]);
     }
 }
-
-

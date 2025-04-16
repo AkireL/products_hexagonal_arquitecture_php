@@ -4,7 +4,7 @@ namespace App\Features\User\Domain\Entities;
 
 class User
 {
-    public function __construct(private ?int $id=null, private ?string $name=null, private ?string $email=null, private ?string $password = null) {}
+    public function __construct(private ?int $id = null, private ?string $name = null, private ?string $email = null, private ?string $password = null) {}
 
     public function getId(): int
     {

@@ -3,8 +3,8 @@
 namespace App\Features\User\Infraestructure\Persistence;
 
 use App\Features\User\Domain\Entities\User as UserDomain;
-use App\Models\User;
 use App\Features\User\Domain\Ports\UserRepositoryInterface;
+use App\Models\User;
 
 class EloquentUserRepository implements UserRepositoryInterface
 {

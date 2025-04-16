@@ -3,10 +3,10 @@
 namespace App\Features\Order\Infraestructure\Persistence;
 
 use App\Features\Order\Domain\Entities\Order as OrderEntity;
+use App\Features\Order\Domain\Ports\OrderUserRepositoryInterface;
 use App\Features\Product\Domain\Entities\Product as ProductEntity;
 use App\Features\User\Domain\Entities\User as UserEntity;
 use App\Models\Order as OrderModel;
-use App\Features\Order\Domain\Ports\OrderUserRepositoryInterface;
 
 class EloquentOrderUserRepository implements OrderUserRepositoryInterface
 {
@@ -15,13 +15,13 @@ class EloquentOrderUserRepository implements OrderUserRepositoryInterface
         return [];
     }
 
-    public function save(OrderEntity $order) : void
+    public function save(OrderEntity $order): void
     {
         $model = OrderModel::create([
-            'user_id' => $order->getUser()->getId()
+            'user_id' => $order->getUser()->getId(),
         ]);
 
-        if (count($order->getProducts()) <=0) {
+        if (count($order->getProducts()) <= 0) {
             return;
         }
 
@@ -59,6 +59,7 @@ class EloquentOrderUserRepository implements OrderUserRepositoryInterface
             ];
         }
         $orderEntity->setProducts($products);
+
         return $orderEntity;
     }
 
@@ -86,6 +87,7 @@ class EloquentOrderUserRepository implements OrderUserRepositoryInterface
                         'total_price' => $existProduct->pivot->total_price + $product->getUnitPrice(),
                     ]
                 );
+
             return;
         }
         $orderModel->products()->attach($product->getId(), [
@@ -115,11 +117,9 @@ class EloquentOrderUserRepository implements OrderUserRepositoryInterface
                 'unit_price' => $productOrder->pivot->unit_price,
             ];
         }
+
         return $productsToSend;
     }
 
-    public function updateProduct(OrderEntity $order, ProductEntity $product): void
-    {
-
-    }
+    public function updateProduct(OrderEntity $order, ProductEntity $product): void {}
 }

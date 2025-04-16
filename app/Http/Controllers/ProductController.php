@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
-use App\Models\Product;
 use App\Features\Product\Domain\Entities\Product as ProductDomain;
 use App\Features\Product\Domain\UseCases\CreateProduct;
 use App\Features\Product\Domain\UseCases\DeleteProduct;
@@ -11,6 +9,8 @@ use App\Features\Product\Domain\UseCases\ListProduct;
 use App\Features\Product\Domain\UseCases\RetrieveProduct;
 use App\Features\Product\Domain\UseCases\UpdateProduct;
 use App\Features\Product\Infraestructure\Persistence\EloquentProductRepository;
+use App\Http\Requests\ProductRequest;
+use App\Models\Product;
 
 class ProductController extends Controller
 {

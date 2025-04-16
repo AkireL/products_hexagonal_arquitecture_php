@@ -5,12 +5,19 @@ namespace App\Features\Product\Domain\Entities;
 class ProductOrder
 {
     private int $id;
+
     private int $orderId;
+
     private int $productId;
+
     private string $name;
+
     private int $quantity;
+
     private float $totalPrice;
+
     private string $description;
+
     private float $unitPrice;
 
     public function __construct(
@@ -22,8 +29,7 @@ class ProductOrder
         float $totalPrice,
         string $description,
         float $unitPrice
-    )
-    {
+    ) {
         $this->id = $id;
         $this->orderId = $orderId;
         $this->productId = $productId;
@@ -33,6 +39,7 @@ class ProductOrder
         $this->description = $description;
         $this->unitPrice = $unitPrice;
     }
+
     public function getName(): string
     {
         return $this->name;

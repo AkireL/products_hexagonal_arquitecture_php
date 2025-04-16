@@ -8,7 +8,9 @@ use App\Features\User\Domain\Entities\User;
 class Order
 {
     private int $id;
+
     private array $products;
+
     private User $user;
 
     public function __construct(User $user, int $id = 0)
@@ -25,11 +27,14 @@ class Order
 
     public function addProduct(Product $product, float $quantity)
     {
-        if ($product->getStock() <= $quantity){return null;}
+        if ($product->getStock() <= $quantity) {
+            return null;
+        }
 
-        foreach($this->products as $key => $item) {
-            if ($item->getId() == $product->getId()){
+        foreach ($this->products as $key => $item) {
+            if ($item->getId() == $product->getId()) {
                 $this->products[$key]['quantity'] += $quantity;
+
                 return;
             }
         }

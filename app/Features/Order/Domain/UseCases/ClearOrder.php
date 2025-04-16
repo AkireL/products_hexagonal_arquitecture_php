@@ -10,8 +10,7 @@ class ClearOrder
     public function __construct(
         private OrderUserRepositoryInterface $orderUserRepository,
         private UserRepositoryInterface $userRepository,
-    )
-    {}
+    ) {}
 
     public function execute(int $orderId): void
     {
