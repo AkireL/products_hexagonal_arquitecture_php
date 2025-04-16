@@ -27,7 +27,7 @@ class Order
 
     public function addProduct(Product $product, float $quantity)
     {
-        if ($product->getStock() <= $quantity) {
+        if ($product->getStock() < $quantity) {
             return null;
         }
 
