@@ -6,7 +6,7 @@ use App\Features\Order\Domain\Entities\Order;
 use App\Features\Product\Domain\Entities\Product;
 use App\Features\User\Domain\Entities\User;
 
-interface OrderUserRepositoryInterface
+interface OrderRepositoryInterface
 {
     public function list(int $userId): array;
 

@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use App\Features\Order\Domain\UseCases\ClearOrder;
 use App\Features\Order\Domain\UseCases\CreateOrder;
 use App\Features\Order\Domain\UseCases\RetrieveOrder;
-use App\Features\Order\Infraestructure\Persistence\EloquentOrderUserRepository;
+use App\Features\Order\Infraestructure\Persistence\EloquentOrderRepository;
 use App\Features\Product\Infraestructure\Persistence\EloquentProductRepository;
 use App\Features\User\Infraestructure\Persistence\EloquentUserRepository;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 
-class OrderUserController extends Controller
+class OrderController extends Controller
 {
     public function show(Order $order)
     {
-        $useCase = new RetrieveOrder(new EloquentOrderUserRepository, new EloquentUserRepository);
+        $useCase = new RetrieveOrder(new EloquentOrderRepository, new EloquentUserRepository);
         $order = $useCase->execute($order->user_id, $order->id);
 
         return response()->json([
@@ -30,7 +30,7 @@ class OrderUserController extends Controller
         $data = $request->validated();
         $userRepository = new EloquentUserRepository;
 
-        $useCase = new CreateOrder(new EloquentOrderUserRepository, new EloquentProductRepository);
+        $useCase = new CreateOrder(new EloquentOrderRepository, new EloquentProductRepository);
 
         $userId = $data['user_id'];
         $productsToSave = $data['products'];
@@ -47,7 +47,7 @@ class OrderUserController extends Controller
     public function clear(Order $order)
     {
         $useCase = new ClearOrder(
-            new EloquentOrderUserRepository,
+            new EloquentOrderRepository,
             new EloquentUserRepository
         );
 

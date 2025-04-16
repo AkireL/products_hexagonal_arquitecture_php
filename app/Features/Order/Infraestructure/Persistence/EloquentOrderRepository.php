@@ -3,12 +3,12 @@
 namespace App\Features\Order\Infraestructure\Persistence;
 
 use App\Features\Order\Domain\Entities\Order as OrderEntity;
-use App\Features\Order\Domain\Ports\OrderUserRepositoryInterface;
+use App\Features\Order\Domain\Ports\OrderRepositoryInterface;
 use App\Features\Product\Domain\Entities\Product as ProductEntity;
 use App\Features\User\Domain\Entities\User as UserEntity;
 use App\Models\Order as OrderModel;
 
-class EloquentOrderUserRepository implements OrderUserRepositoryInterface
+class EloquentOrderRepository implements OrderRepositoryInterface
 {
     public function list(int $userId): array
     {
