@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use App\Product\Domain\Entities\Product as ProductDomain;
-use App\Product\Domain\UseCases\CreateProduct;
-use App\Product\Domain\UseCases\DeleteProduct;
-use App\Product\Domain\UseCases\ListProduct;
-use App\Product\Domain\UseCases\RetrieveProduct;
-use App\Product\Domain\UseCases\UpdateProduct;
-use App\Product\Infraestructure\Persistence\EloquentProductRepository;
+use App\Features\Product\Domain\Entities\Product as ProductDomain;
+use App\Features\Product\Domain\UseCases\CreateProduct;
+use App\Features\Product\Domain\UseCases\DeleteProduct;
+use App\Features\Product\Domain\UseCases\ListProduct;
+use App\Features\Product\Domain\UseCases\RetrieveProduct;
+use App\Features\Product\Domain\UseCases\UpdateProduct;
+use App\Features\Product\Infraestructure\Persistence\EloquentProductRepository;
 
 class ProductController extends Controller
 {

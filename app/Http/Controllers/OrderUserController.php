@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Order\Domain\UseCases\CreateOrder;
-use App\Order\Domain\UseCases\RetrieveOrder;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
-use App\Order\Domain\UseCases\ClearOrder;
-use App\Order\Infraestructure\Persistence\EloquentOrderUserRepository;
-use App\Product\Infraestructure\Persistence\EloquentProductRepository;
-use App\User\Infraestructure\Persistence\EloquentUserRepository;
+use App\Features\Order\Domain\UseCases\CreateOrder;
+use App\Features\Order\Domain\UseCases\ClearOrder;
+use App\Features\Order\Domain\UseCases\RetrieveOrder;
+use App\Features\Order\Infraestructure\Persistence\EloquentOrderUserRepository;
+use App\Features\Product\Infraestructure\Persistence\EloquentProductRepository;
+use App\Features\User\Infraestructure\Persistence\EloquentUserRepository;
 
 class OrderUserController extends Controller
 {
