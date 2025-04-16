@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\UseCases\Order\CreateOrder;
+use App\Domain\UseCases\Order\RemoveProducts;
 use App\Domain\UseCases\Order\RetrieveOrder;
 use App\Http\Requests\OrderRequest;
 use App\Infraestructure\Persistence\EloquentOrderUserRepository;
@@ -40,6 +41,20 @@ class OrderUserController extends Controller
 
         return response()->json([
             'message' => 'Order created successfully',
+        ]);
+    }
+
+    public function clear(Order $order)
+    {
+        $useCase = new RemoveProducts(
+            new EloquentOrderUserRepository,
+            new EloquentUserRepository
+        );
+
+        $useCase->execute($order->id);
+
+        return response()->json([
+            'message' => 'Order cleared successfully',
         ]);
     }
 }
