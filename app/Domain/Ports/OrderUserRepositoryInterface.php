@@ -17,15 +17,9 @@ interface OrderUserRepositoryInterface
 
     public function clear(int $orderId): void;
 
-    public function remove(Order $order, Product $product): void;
-
     public function addProduct(Order $order, Product $product): void;
-
-    public function getProduct(Order $order, int $productId): ?ProductOrder;
 
     public function getProducts(Order $order): array;
 
     public function updateProduct(Order $order, Product $product): void;
-
-    public function updateOrder(Order $order): void;
 }
