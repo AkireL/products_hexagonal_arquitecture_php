@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\UseCases\Order\CreateOrder;
-use App\Domain\UseCases\Order\RemoveProducts;
-use App\Domain\UseCases\Order\RetrieveOrder;
+use App\Order\Domain\UseCases\CreateOrder;
+use App\Order\Domain\UseCases\RetrieveOrder;
 use App\Http\Requests\OrderRequest;
-use App\Infraestructure\Persistence\EloquentOrderUserRepository;
-use App\Infraestructure\Persistence\EloquentProductRepository;
-use App\Infraestructure\Persistence\EloquentUserRepository;
 use App\Models\Order;
+use App\Order\Domain\UseCases\ClearOrder;
+use App\Order\Infraestructure\Persistence\EloquentOrderUserRepository;
+use App\User\Infraestructure\Persistence\EloquentUserRepository;
 
 class OrderUserController extends Controller
 {
@@ -46,7 +45,7 @@ class OrderUserController extends Controller
 
     public function clear(Order $order)
     {
-        $useCase = new RemoveProducts(
+        $useCase = new ClearOrder(
             new EloquentOrderUserRepository,
             new EloquentUserRepository
         );

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\UseCases\User\CreateUser;
-use App\Domain\UseCases\User\DeleteUser;
-use App\Domain\UseCases\User\UpdateUser;
 use App\Http\Requests\UserRequest;
-use App\Infraestructure\Persistence\EloquentUserRepository;
 use App\Models\User;
+use App\User\Domain\UseCases\CreateUser;
+use App\User\Domain\UseCases\DeleteUser;
+use App\User\Domain\UseCases\UpdateUser;
+use App\User\Infraestructure\Persistence\EloquentUserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
