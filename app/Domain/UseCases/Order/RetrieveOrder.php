@@ -2,18 +2,22 @@
 
 namespace App\Domain\UseCases\Order;
 
-use App\Domain\Entities\User;
+use App\Domain\Entities\Order;
+use App\Domain\Ports\OrderUserRepositoryInterface;
 use App\Domain\Ports\UserRepositoryInterface;
 
 class RetrieveOrder
 {
     public function __construct(
-        private \App\Domain\Ports\OrderUserRepositoryInterface $orderUserRepository,
+        private OrderUserRepositoryInterface $orderUserRepository,
         private UserRepositoryInterface $userRepository,
     ) {}
 
-    public function execute(User $user, int $orderId): ?\App\Domain\Entities\Order
+    public function execute($userId, int $orderId): ?Order
     {
-        return $this->orderUserRepository->findById($user, $orderId);
+        $user = $this->userRepository->findById($userId);
+        $order = $this->orderUserRepository->findById($user, $orderId);
+
+        return $order;
     }
 }

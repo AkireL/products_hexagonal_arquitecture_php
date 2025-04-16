@@ -20,11 +20,6 @@ class Order
         return $this->user;
     }
 
-    public function loadProducts()
-    {
-
-    }
-
     public function addProduct(Product $product, float $quantity)
     {
         if ($product->getStock() <= $quantity){return null;}
@@ -48,6 +43,11 @@ class Order
     public function getProducts(): array
     {
         return $this->products;
+    }
+
+    public function setProducts(array $products): void
+    {
+        $this->products = $products;
     }
 
     public function getId(): int

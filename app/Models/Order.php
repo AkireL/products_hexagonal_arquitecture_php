@@ -21,16 +21,12 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class, 'order_products')
             ->withPivot(
+                'id',
                 'quantity',
                 'product_unit_price',
                 'product_description',
                 'total_price',
             )
             ->withTimestamps();
-    }
-
-    public function getAllProducts()
-    {
-        return $this->products()->whereNotNull('products.id')->get();
     }
 }

@@ -2,15 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Entities\Order;
 use App\Domain\UseCases\Order\CreateOrder;
+use App\Domain\UseCases\Order\RetrieveOrder;
 use App\Http\Requests\OrderRequest;
 use App\Infraestructure\Persistence\EloquentOrderUserRepository;
 use App\Infraestructure\Persistence\EloquentProductRepository;
 use App\Infraestructure\Persistence\EloquentUserRepository;
+use App\Models\Order;
 
 class OrderUserController extends Controller
 {
+    public function show(Order $order)
+    {
+        $useCase = new RetrieveOrder(new EloquentOrderUserRepository, new EloquentUserRepository);
+        $order = $useCase->execute($order->user_id, $order->id);
+
+        return response()->json([
+            'id' => $order->getId(),
+            'user_id' => $order->getUser()->getId(),
+            'products' => $order->getProducts(),
+        ]);
+    }
+
     public function store(OrderRequest $request)
     {
         $data = $request->validated();

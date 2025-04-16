@@ -57,15 +57,18 @@ class EloquentOrderUserRepository implements OrderUserRepositoryInterface
 
         $orderEntity = new OrderEntity($user, $order->id);
 
-        foreach ($order->products() as $product) {
-            // $productE = new ProductEntity(
-            //     $product->getId(),
-            //     $product->getName(),
-            //     $product->getUnitPrice(),
-            //     $product->getStock(),
-            //     $product->getDescription(),
-            // );
+        $products = [];
+
+        foreach ($order->products as $product) {
+            $products[] = [
+                'id' => $product->pivot->id,
+                'quantity' => $product->pivot->quantity,
+                'total_price' => $product->pivot->total_price,
+                'description' => $product->pivot->product_description,
+                'unit_price' => $product->pivot->product_unit_price,
+            ];
         }
+        $orderEntity->setProducts($products);
         return $orderEntity;
     }
 
