@@ -8,6 +8,7 @@ use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Order\Domain\UseCases\ClearOrder;
 use App\Order\Infraestructure\Persistence\EloquentOrderUserRepository;
+use App\Product\Infraestructure\Persistence\EloquentProductRepository;
 use App\User\Infraestructure\Persistence\EloquentUserRepository;
 
 class OrderUserController extends Controller
