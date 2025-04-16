@@ -28,4 +28,9 @@ class Order extends Model
             )
             ->withTimestamps();
     }
+
+    public function getAllProducts()
+    {
+        return $this->products()->whereNotNull('products.id')->get();
+    }
 }

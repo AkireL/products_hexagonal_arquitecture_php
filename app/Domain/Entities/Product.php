@@ -35,4 +35,9 @@ class Product
     {
         return "Product ID: {$this->id}, Name: {$this->name}, Unit Price: {$this->unitPrice}, Stock: {$this->stock}, Description: {$this->description}";
     }
+
+    public function hasStock(int $quantity): bool
+    {
+        return $this->stock >= $quantity;
+    }
 }

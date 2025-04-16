@@ -11,8 +11,8 @@ class CreateProduct
 
     public function execute(string $name, float $unitPrice, int $stock = 0, ?string $description = null): void
     {
-        $user = new Product(0, $name, $unitPrice, $stock, $description);
+        $product = new Product(0, $name, $unitPrice, $stock, $description);
 
-        $this->repository->save($user);
+        $this->repository->save($product);
     }
 }
