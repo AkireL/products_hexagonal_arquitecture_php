@@ -55,6 +55,28 @@ El proyecto está desarrollado utilizando el framework Laravel
 - /app/Features/{feature}/Usecases:Define los casos de uso. 
 - /app/Features/{features}/Infrastructure/Persistence: Implementa los adaptadores y la interacción con base de datos.
 
+```plaintext
+app/Features/
+├── Order/
+│   ├── Domain/
+│   │   ├── Entities/
+│   │   ├── Ports/
+│   │   └── UseCases/
+│   └── Infraestructure/
+│       └── Persistence/
+├── Product/
+│   ├── Domain/
+│   │   ├── Entities/
+│   │   ├── Ports/
+│   │   └── UseCases/
+│   └── Infraestructure/
+│       └── Persistence/
+└── User/
+    ├── Domain/
+    │   └── Entities/ (y otros módulos del dominio)
+    └── Infraestructure/
+```
+
 ## Contribuciones
 
 ¡Las contribuciones son bienvenidas! Por favor, abre un issue o envía un pull request.
