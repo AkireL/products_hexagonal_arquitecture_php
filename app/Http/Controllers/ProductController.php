@@ -14,12 +14,11 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(ListProduct $useCase)
     {
-        $useCase = new ListProduct(new EloquentProductRepository);
         $products = $useCase->execute();
 
-        return response()->json($products);
+        return response()->json(['data' => $products]);
     }
 
     public function show(Product $product)
