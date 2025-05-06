@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Features\User\Domain\UseCases\CreateUser;
 use App\Features\User\Domain\UseCases\DeleteUser;
 use App\Features\User\Domain\UseCases\UpdateUser;
-use App\Features\User\Infraestructure\Persistence\EloquentUserRepository;
+use App\Features\User\Infrastructure\Persistence\EloquentUserRepository;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 

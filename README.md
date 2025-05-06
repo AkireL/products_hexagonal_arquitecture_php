@@ -82,19 +82,19 @@ app/Features/
 │   │   ├── Entities/
 │   │   ├── Ports/
 │   │   └── UseCases/
-│   └── Infraestructure/
+│   └── Infrastructure/
 │       └── Persistence/
 ├── Product/
 │   ├── Domain/
 │   │   ├── Entities/
 │   │   ├── Ports/
 │   │   └── UseCases/
-│   └── Infraestructure/
+│   └── Infrastructure/
 │       └── Persistence/
 └── User/
     ├── Domain/
     │   └── Entities/ (y otros módulos del dominio)
-    └── Infraestructure/
+    └── Infrastructure/
 ```
 
 ## Contribuciones

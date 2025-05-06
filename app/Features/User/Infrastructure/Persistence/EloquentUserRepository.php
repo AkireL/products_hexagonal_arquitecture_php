@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Features\User\Infraestructure\Persistence;
+namespace App\Features\User\Infrastructure\Persistence;
 
 use App\Features\User\Domain\Entities\User as UserDomain;
 use App\Features\User\Domain\Ports\UserRepositoryInterface;

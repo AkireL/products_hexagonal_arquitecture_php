@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Features\Order\Infraestructure\Persistence;
+namespace App\Features\Order\Infrastructure\Persistence;
 
 use App\Features\Order\Domain\Entities\Order as OrderEntity;
 use App\Features\Order\Domain\Ports\OrderRepositoryInterface;

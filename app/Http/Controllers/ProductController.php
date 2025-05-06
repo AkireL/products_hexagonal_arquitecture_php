@@ -8,7 +8,7 @@ use App\Features\Product\Domain\UseCases\DeleteProduct;
 use App\Features\Product\Domain\UseCases\ListProduct;
 use App\Features\Product\Domain\UseCases\RetrieveProduct;
 use App\Features\Product\Domain\UseCases\UpdateProduct;
-use App\Features\Product\Infraestructure\Persistence\EloquentProductRepository;
+use App\Features\Product\Infrastructure\Persistence\EloquentProductRepository;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 

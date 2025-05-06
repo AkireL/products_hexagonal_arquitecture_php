@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Features\Product\Infraestructure\Persistence;
+namespace App\Features\Product\Infrastructure\Persistence;
 
 use App\Features\Product\Domain\Entities\Product as ProductDomain;
 use App\Features\Product\Domain\Ports\ProductRepositoryInterface;
