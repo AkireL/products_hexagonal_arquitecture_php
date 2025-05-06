@@ -6,7 +6,6 @@ use App\Features\Order\Domain\UseCases\ClearOrder;
 use App\Features\Order\Domain\UseCases\CreateOrder;
 use App\Features\Order\Domain\UseCases\RetrieveOrder;
 use App\Features\Order\Infrastructure\Persistence\EloquentOrderRepository;
-use App\Features\Order\Infrastructure\Persistence\EloquentOrderRepository as PersistenceEloquentOrderRepository;
 use App\Features\Product\Infrastructure\Persistence\EloquentProductRepository;
 use App\Features\User\Infrastructure\Persistence\EloquentUserRepository;
 use App\Http\Requests\OrderRequest;
@@ -16,7 +15,7 @@ class OrderController extends Controller
 {
     public function show(Order $order)
     {
-        $useCase = new RetrieveOrder(new PersistenceEloquentOrderRepository, new EloquentUserRepository);
+        $useCase = new RetrieveOrder(new EloquentOrderRepository, new EloquentUserRepository);
         $order = $useCase->execute($order->user_id, $order->id);
 
         return response()->json([
