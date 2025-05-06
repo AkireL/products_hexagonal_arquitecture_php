@@ -3,6 +3,7 @@
 namespace App\Features\Product\Domain\UseCases;
 
 use App\Features\Product\Domain\Ports\ProductRepositoryInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class DeleteProduct
 {
@@ -13,7 +14,7 @@ class DeleteProduct
         $product = $this->repository->findById($id);
 
         if ($product === null) {
-            throw new \Exception('Product not found');
+            throw new HttpException(404, 'Product not found');
         }
 
         $this->repository->delete($id);

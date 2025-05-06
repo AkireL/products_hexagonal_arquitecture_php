@@ -21,25 +21,27 @@ class ProductController extends Controller
         return response()->json(['data' => $products]);
     }
 
-    public function show(Product $product)
+    public function show(Product $product, RetrieveProduct $useCase)
     {
-        $useCase = new RetrieveProduct(new EloquentProductRepository);
         $product = $useCase->execute($product->id);
 
-        return response()->json([
-            'id' => $product->getId(),
-            'name' => $product->getName(),
-            'unit_price' => $product->getUnitPrice(),
-            'stock' => $product->getStock(),
-            'description' => $product->getDescription(),
-        ]);
+        return response()->json(
+            [
+                'data' => [
+                    'id' => $product->getId(),
+                    'name' => $product->getName(),
+                    'unit_price' => $product->getUnitPrice(),
+                    'stock' => $product->getStock(),
+                    'description' => $product->getDescription(),
+                ]
+            ]
+        );
     }
 
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request, CreateProduct $useCase)
     {
         $data = $request->validated();
 
-        $useCase = new CreateProduct(new EloquentProductRepository);
         $useCase->execute(
             $data['name'],
             $data['unit_price'],
@@ -50,10 +52,10 @@ class ProductController extends Controller
         return response()->json(['message' => 'Product created successfully'], 201);
     }
 
-    public function update(ProductRequest $request, Product $product)
+    public function update(ProductRequest $request, Product $product, UpdateProduct $useCase)
     {
         $data = $request->validated();
-        $useCase = new UpdateProduct(new EloquentProductRepository);
+
         $useCase->execute(
             new ProductDomain(
                 $product->id,
@@ -67,11 +69,15 @@ class ProductController extends Controller
         return response()->json(['message' => 'Product updated successfully']);
     }
 
-    public function destroy(Product $product)
+    public function destroy(Product $product, DeleteProduct $useCase)
     {
-        $useCase = new DeleteProduct(new EloquentProductRepository);
         $useCase->execute($product->id);
 
-        return response()->json(['message' => 'Product deleted successfully']);
+        return response()->json(
+            [
+                'message' => 'Product deleted successfully'
+            ],
+            204
+        );
     }
 }

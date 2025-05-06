@@ -11,9 +11,9 @@ class UpdateProduct
 
     public function execute(Product $product): void
     {
-        $product = $this->repository->findById($product->getId());
+        $currentProduct = $this->repository->findById($product->getId());
 
-        if ($product === null) {
+        if ($currentProduct === null) {
             throw new \Exception('Product not found');
         }
 

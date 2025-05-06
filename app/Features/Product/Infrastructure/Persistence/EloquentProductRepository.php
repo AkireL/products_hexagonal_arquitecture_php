@@ -47,16 +47,14 @@ class EloquentProductRepository implements ProductRepositoryInterface
 
     public function update(ProductDomain $productDomain): void
     {
-        $product = Product::find($productDomain->getId());
-
-        if ($product) {
-            $product->update([
+        Product::query()
+            ->where('id', $productDomain->getId())
+            ->update([
                 'name' => $productDomain->getName(),
                 'description' => $productDomain->getDescription(),
-                'stock' => $productDomain->getStock(),
                 'unit_price' => $productDomain->getUnitPrice(),
+                'stock' => $productDomain->getStock(),
             ]);
-        }
     }
 
     public function list(): array

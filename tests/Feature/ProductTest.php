@@ -38,4 +38,61 @@ class ProductTest extends TestCase
             ->assertOk()
             ->assertJsonCount(10, 'data');
     }
+
+    /**
+     * @test
+     */
+    public function it_retrieves_a_product(): void
+    {
+        $product = Product::factory()->create();
+
+        $this->getJson(route('product.show', $product->id))
+            ->assertOk()
+            ->assertJson([
+                'data' => [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'description' => $product->description,
+                    'stock' => $product->stock,
+                    'unit_price' => $product->unit_price,
+                ],
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_updates_a_product(): void
+    {
+        $product = Product::factory()->create();
+
+        $updatedData = [
+            'id' => $product->getKey(),
+            'name' => "updated book",
+            'unit_price' => "15.50",
+            'stock' => 20,
+            'description' => "updated description",
+        ];
+
+        $this->putJson(route('product.update', $product->id), $updatedData)
+            ->assertOk()
+            ->assertJson([
+                'message' => 'Product updated successfully',
+            ]);
+
+        $this->assertDatabaseHas('products', $updatedData);
+    }
+
+    /**
+     * @test
+     */
+    public function it_deletes_a_product(): void
+    {
+        $product = Product::factory()->create();
+
+        $this->deleteJson(route('product.destroy', $product->id))
+            ->assertNoContent();
+
+        $this->assertDatabaseMissing('products', ['id' => $product->id]);
+    }
 }
