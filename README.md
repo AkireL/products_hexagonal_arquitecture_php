@@ -46,14 +46,34 @@ Este proyecto está preparado para ejecutarse en un entorno Docker. Asegúrate d
     docker exec -it hexagonal_app bash
     ```
 
-El proyecto está desarrollado utilizando el framework Laravel
+Nota:
+Para crear la imagen del proyecto se tiene que instalar las dependencias y para ello hay dos opciones.
+
+Opción 1. Tener composer localmente: Instalar composer y ejecutar la instalación de dependencias.
+
+```bash
+composer install
+```
+
+Opción 2. Usar una imagen de composer: El proyecto usa sail por lo tanto podemos usar esto para instalar las dependencias.
+
+```bash
+docker run --rm \
+    run --rm \
+    -v "$(pwd)":/opt \
+    -w /opt \
+    docker.io/laravelsail/php84-composer:latest \
+    bash -c "composer i"
+```
+
+El proyecto está desarrollado utilizando el framework Laravel.
 
 ## Estructura del Proyecto
 
-- /app/Features/{feature}/Domain**: Contiene las entidades y lógica de negocio.
-- /app/Features/{feature}/Ports: Define los puertos.
-- /app/Features/{feature}/Usecases:Define los casos de uso. 
-- /app/Features/{features}/Infrastructure/Persistence: Implementa los adaptadores y la interacción con base de datos.
+-   /app/Features/{feature}/Domain\*\*: Contiene las entidades y lógica de negocio.
+-   /app/Features/{feature}/Ports: Define los puertos.
+-   /app/Features/{feature}/Usecases:Define los casos de uso.
+-   /app/Features/{features}/Infrastructure/Persistence: Implementa los adaptadores y la interacción con base de datos.
 
 ```plaintext
 app/Features/
