@@ -15,7 +15,7 @@ class CreateOrder
 
     ) {}
 
-    public function execute(User $user, array $products): void
+    public function execute(User $user, array $products): Order
     {
         $order = new Order($user);
 
@@ -28,6 +28,6 @@ class CreateOrder
             $order->addProduct($product, $quantity);
         }
 
-        $this->orderUserRepository->save($order);
+        return $this->orderUserRepository->save($order);
     }
 }
