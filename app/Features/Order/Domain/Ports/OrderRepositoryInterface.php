@@ -16,8 +16,6 @@ interface OrderRepositoryInterface
 
     public function clear(int $orderId): void;
 
-    public function addProduct(Order $order, Product $product): void;
-
     public function getProducts(Order $order): array;
 
     public function updateProduct(Order $order, Product $product): void;

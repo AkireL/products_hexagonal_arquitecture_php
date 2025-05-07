@@ -15,17 +15,21 @@ class EloquentOrderRepository implements OrderRepositoryInterface
         return [];
     }
 
-    public function save(OrderEntity $order): void
+    public function save(OrderEntity $order): OrderEntity
     {
         $model = OrderModel::create([
             'user_id' => $order->getUser()->getId(),
         ]);
 
+        $order->setId($model->getKey());
+
         if (count($order->getProducts()) <= 0) {
-            return;
+            $order->setProducts([]);
+
+            return $order;
         }
 
-        foreach ($order->getProducts() as $product) {
+        foreach ($order->getProducts() as $key => $product) {
             $model->products()->attach($product['id'], [
                 'quantity' => $product['quantity'],
                 'total_price' => $product['total_price'],
@@ -33,6 +37,8 @@ class EloquentOrderRepository implements OrderRepositoryInterface
                 'product_unit_price' => $product['unit_price'],
             ]);
         }
+
+        return $this->findById($order->getUser(), $model->getKey());
     }
 
     public function findById(UserEntity $user, int $orderId): ?OrderEntity
@@ -52,6 +58,7 @@ class EloquentOrderRepository implements OrderRepositoryInterface
         foreach ($order->products as $product) {
             $products[] = [
                 'id' => $product->pivot->id,
+                'product_id' => $product->id,
                 'quantity' => $product->pivot->quantity,
                 'total_price' => $product->pivot->total_price,
                 'description' => $product->pivot->product_description,
@@ -70,32 +77,6 @@ class EloquentOrderRepository implements OrderRepositoryInterface
         if ($order) {
             $order->products()->detach();
         }
-    }
-
-    public function addProduct(OrderEntity $order, ProductEntity $product): void
-    {
-        $orderModel = OrderModel::find($order->getId());
-
-        if ($orderModel && $orderModel->products->contains($product->getId())) {
-            $existProduct = $orderModel->products->find($product->getId());
-
-            $orderModel
-                ->products()
-                ->updateExistingPivot(
-                    $product->getId(), [
-                        'quantity' => $existProduct->pivot->quantity + 1,
-                        'total_price' => $existProduct->pivot->total_price + $product->getUnitPrice(),
-                    ]
-                );
-
-            return;
-        }
-        $orderModel->products()->attach($product->getId(), [
-            'quantity' => 1,
-            'total_price' => $product->getUnitPrice(),
-            'description' => $product->getDescription(),
-            'unit_price' => $product->getUnitPrice(),
-        ]);
     }
 
     public function getProducts(OrderEntity $order): array
