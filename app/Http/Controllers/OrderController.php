@@ -19,9 +19,11 @@ class OrderController extends Controller
         $order = $useCase->execute($order->user_id, $order->id);
 
         return response()->json([
-            'id' => $order->getId(),
-            'user_id' => $order->getUser()->getId(),
-            'products' => $order->getProducts(),
+            'data' => [
+                'id' => $order->getId(),
+                'user_id' => $order->getUser()->getId(),
+                'products' => $order->getProducts(),
+            ]
         ]);
     }
 
@@ -37,11 +39,15 @@ class OrderController extends Controller
 
         $user = $userRepository->findById($userId);
 
-        $useCase->execute($user, $productsToSave);
+        $order = $useCase->execute($user, $productsToSave);
 
         return response()->json([
-            'message' => 'Order created successfully',
-        ]);
+            'data' => [
+                'id' => $order->getId(),
+                'user_id' => $order->getUser()->getId(),
+                'products' => $order->getProducts(),
+            ]
+        ], 201);
     }
 
     public function clear(Order $order)
