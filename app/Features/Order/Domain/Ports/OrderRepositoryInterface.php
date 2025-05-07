@@ -10,7 +10,7 @@ interface OrderRepositoryInterface
 {
     public function list(int $userId): array;
 
-    public function save(Order $order): void;
+    public function save(Order $order): Order;
 
     public function findById(User $user, int $orderId): ?Order;
 

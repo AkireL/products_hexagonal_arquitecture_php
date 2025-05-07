@@ -32,7 +32,7 @@ class Order
         }
 
         foreach ($this->products as $key => $item) {
-            if ($item->getId() == $product->getId()) {
+            if ($item['id'] == $product->getId()) {
                 $this->products[$key]['quantity'] += $quantity;
 
                 return;
@@ -61,5 +61,12 @@ class Order
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 }
