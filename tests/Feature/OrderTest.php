@@ -50,10 +50,10 @@ class OrderTest extends TestCase
                             'quantity' => $bd['quantity'],
                             'total_price' => $bd['total_price'],
                             'description' => $bd['product_description'],
-                            'unit_price' => $bd['product_unit_price']
+                            'unit_price' => $bd['product_unit_price'],
                         ],
-                    ]
-                ]
+                    ],
+                ],
             ]);
 
         $this->assertDatabaseHas(
@@ -63,7 +63,7 @@ class OrderTest extends TestCase
                 'quantity' => $bd['quantity'],
                 'total_price' => $bd['total_price'],
                 'product_description' => $bd['product_description'],
-                'product_unit_price' => $bd['product_unit_price']
+                'product_unit_price' => $bd['product_unit_price'],
             ],
         );
     }

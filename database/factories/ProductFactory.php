@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProductFactory extends Factory
 {
-
     protected $model = \App\Models\Product::class;
 
     /**

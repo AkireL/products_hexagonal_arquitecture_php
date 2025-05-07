@@ -23,7 +23,7 @@ class OrderController extends Controller
                 'id' => $order->getId(),
                 'user_id' => $order->getUser()->getId(),
                 'products' => $order->getProducts(),
-            ]
+            ],
         ]);
     }
 
@@ -46,7 +46,7 @@ class OrderController extends Controller
                 'id' => $order->getId(),
                 'user_id' => $order->getUser()->getId(),
                 'products' => $order->getProducts(),
-            ]
+            ],
         ], 201);
     }
 

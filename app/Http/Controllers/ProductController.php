@@ -8,7 +8,6 @@ use App\Features\Product\Domain\UseCases\DeleteProduct;
 use App\Features\Product\Domain\UseCases\ListProduct;
 use App\Features\Product\Domain\UseCases\RetrieveProduct;
 use App\Features\Product\Domain\UseCases\UpdateProduct;
-use App\Features\Product\Infrastructure\Persistence\EloquentProductRepository;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 
@@ -33,7 +32,7 @@ class ProductController extends Controller
                     'unit_price' => $product->getUnitPrice(),
                     'stock' => $product->getStock(),
                     'description' => $product->getDescription(),
-                ]
+                ],
             ]
         );
     }
@@ -75,7 +74,7 @@ class ProductController extends Controller
 
         return response()->json(
             [
-                'message' => 'Product deleted successfully'
+                'message' => 'Product deleted successfully',
             ],
             204
         );

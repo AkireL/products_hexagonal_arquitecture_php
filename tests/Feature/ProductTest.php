@@ -9,22 +9,22 @@ use Tests\TestCase;
 class ProductTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test
      */
     public function it_create_a_product(): void
     {
         $data = [
-            'name' => "book",
-            'description' => "pink 5mm.",
+            'name' => 'book',
+            'description' => 'pink 5mm.',
             'stock' => 10,
-            'unit_price' => "12.80",
+            'unit_price' => '12.80',
         ];
 
         $this->postJson(route('product.store'), $data)
             ->assertCreated()
-            ->dump()
-            ->assertJson(["message" => "Product created successfully"]);
+            ->assertJson(['message' => 'Product created successfully']);
     }
 
     /**
@@ -68,10 +68,10 @@ class ProductTest extends TestCase
 
         $updatedData = [
             'id' => $product->getKey(),
-            'name' => "updated book",
-            'unit_price' => "15.50",
+            'name' => 'updated book',
+            'unit_price' => '15.50',
             'stock' => 20,
-            'description' => "updated description",
+            'description' => 'updated description',
         ];
 
         $this->putJson(route('product.update', $product->id), $updatedData)
